@@ -1,15 +1,25 @@
-import React from "react";
+import React, {useState } from "react";
 import "./App.scss";
 
 function App() {
-  const [state, setState] = React.useState(0);
+  const [state, setState] = useState(0);
+
   const statePlus = () => {
-    setState(state + 1);
+    setState((prev) => prev + 1);
   };
   const stateMinus = () => {
-    setState(state - 1);
+    setState((prev) => prev - 1);
   };
-
+const delayedStateMinus = () => {
+  setTimeout(() => {
+    stateMinus()
+  }, 1000);
+}
+const delayedStatePlus = () => {
+  setTimeout(() => {
+    statePlus()
+  }, 1000);
+}
   return (
     <div className="App">
       <div className="Counter">
@@ -18,19 +28,18 @@ function App() {
         <button onClick={stateMinus} className="minus">
           - Minus
         </button>
-   
+
         <button onClick={statePlus} className="plus">
           Plus +
         </button>
-        <button onClick={stateMinus} className="minus async">
+        <button onClick={delayedStateMinus} className="minus async">
           Minus in 1 sec
         </button>
-        <button onClick={statePlus} className="plus async">
+        <button onClick={delayedStatePlus} className="plus async">
           Plus in 1 sec
         </button>
       </div>
     </div>
   );
 }
-
 export default App;
